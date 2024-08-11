@@ -32,8 +32,8 @@ server.use(parser.urlencoded({ extended: true }));
 
 server.use(fileUpload());
 
-const validationPost = require('./middleware/storePost');
-const validationRegistration = require('./middleware/storeRegistration');
+const validationPost = require('./middleware/storePost'); // custom middleware
+const validationRegistration = require('./middleware/storeRegistration'); //custom middleware
 server.use('/post/store', validationPost);
 server.use('/register/store', validationRegistration);
 //----------------------------------------------------------------------//
