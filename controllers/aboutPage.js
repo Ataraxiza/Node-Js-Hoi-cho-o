@@ -1,1 +1,1 @@
-module.exports = (req,res) => {res.render('layouts/about');}
+module.exports = (req,res) => {return res.render('layouts/about');}

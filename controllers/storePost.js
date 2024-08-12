@@ -7,4 +7,4 @@ module.exports = (req,res) => {
 	console.log(req.body);
 	console.log(req.files);
 	Post.create({...req.body,image:'/posts/${image.name}'});
-	res.redirect('/');}
+	return res.redirect('/');}

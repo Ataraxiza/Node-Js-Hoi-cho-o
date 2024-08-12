@@ -9,8 +9,8 @@ const accountSchema = new mongoose.Schema({
 
 accountSchema.pre('save', function(next){
 	const account = this;
-	bcrypt.hash(user.password, 10, function(err, encrypted){
-		user.password = encrypted;
+	bcrypt.hash(account.password, 10, function(err, encrypted){
+		account.password = encrypted;
 		next(); }) //call next so that the mongoose can continue creating the account data
 	}
 )

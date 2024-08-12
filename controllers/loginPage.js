@@ -1,1 +1,1 @@
-module.exports = (req,res) => {res.render('layouts/login');}
+module.exports = (req,res) => {return res.render('layouts/login');}
