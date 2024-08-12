@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
         if (account) {
             const same = await bcrypt.compare(password, account.password);
             if (same) {
+				req.session.accountName = account.username;
 				req.session.accountId = account._id;
                 return res.redirect('/');
             } else {

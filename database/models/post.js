@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({'title': String, 'description': String, 'content': String, 'username': String,
-										'createdAt': {type: Date, default: new Date(), 'image': String }});
+const postSchema = new mongoose.Schema({
+	'username': String,
+	'title': String,
+	'description': String,
+	'content': String,
+	'createdAt': {type: Date, default: new Date()},
+	'image': String });
 //create a schema (structure of a document) called postSchema.
 
 const Post = mongoose.model('Post', postSchema);

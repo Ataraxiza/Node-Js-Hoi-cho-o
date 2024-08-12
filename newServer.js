@@ -8,9 +8,25 @@ const parser = require('body-parser');
 
 const session = require('express-session');
 
-const server = new express();
+const connectMongo = require('connect-mongo');
 
 const fileUpload = require('express-fileupload');
+
+const server = new express();
+
+mongoose.connect('mongodb://localhost/node-js-test-blog');
+
+const mongoStore = connectMongo.create({
+  mongoUrl: 'mongodb://localhost/node-js-test-blog',
+  mongooseConnection: mongoose.connection
+});
+
+server.use(session({
+	secret:'secret',
+	resave: true,
+	saveUninitialized: false,
+	store: mongoStore
+}));
 
 const homePageController = require('./controllers/homePage');
 const aboutPageController = require('./controllers/aboutPage');
@@ -23,8 +39,6 @@ const storeRegistrationController = require('./controllers/storeRegistration');
 const loginPageController = require('./controllers/loginPage');
 const storeLoginController = require('./controllers/storeLogin');
 
-mongoose.connect('mongodb://localhost/node-js-test-blog');
-
 server.use(express.static('public'));
 
 server.use(engine);
@@ -35,13 +49,9 @@ server.use(parser.urlencoded({ extended: true }));
 
 server.use(fileUpload());
 
-server.use(session({
-	secret: 'secret'})
-	);
-
-const validationPost = require('./middleware/storePost'); // custom middleware
+//const validationPost = require('./middleware/storePost'); // custom middleware /// Note: Hoat dong khong nhu y muon
 const validationRegistration = require('./middleware/storeRegistration'); //custom middleware
-server.use('/post/store', validationPost);
+//server.use('/post/store', validationPost);
 server.use('/registration/store', validationRegistration);
 //----------------------------------------------------------------------//
 
